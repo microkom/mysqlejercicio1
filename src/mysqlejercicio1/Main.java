@@ -63,7 +63,7 @@ public class Main {
                 }
 
             } while (!entryOk);
-
+/*
             // captura por teclado de Nombre - String
             do {
                 try {
@@ -106,6 +106,14 @@ public class Main {
             retorno = stmt.executeUpdate();
             if (retorno > 0) {
                 System.out.println("\t"+retorno + " registro ejecutado");
+            }
+      */    
+            //CONSULTA DE LOS DATOS INSERTADOS
+            stmt = con.prepareStatement("SELECT * FROM Categorias WHERE idCategoria=?");
+            stmt.setInt(1, categoria.getId());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getInt(1) + " " + rs.getString(2) + " \t" + rs.getString(3));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
