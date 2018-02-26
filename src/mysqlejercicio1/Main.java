@@ -50,7 +50,7 @@ public class Main {
                     System.out.print("\tidCategoría: ");
                     categoria.setId(Integer.parseInt(sc.nextLine()));
                     if (categoria.getId() < 1) {
-                        Error error1 = new Error("Debe ser mayor que cero");
+                        Exception error1 = new Exception("Debe ser mayor que cero");
                         throw error1;
                     }
                     entryOk = true;
@@ -63,7 +63,7 @@ public class Main {
                 }
 
             } while (!entryOk);
-/*
+            /*
             // captura por teclado de Nombre - String
             do {
                 try {
@@ -107,13 +107,16 @@ public class Main {
             if (retorno > 0) {
                 System.out.println("\t"+retorno + " registro ejecutado");
             }
-      */    
+             */
             //CONSULTA DE LOS DATOS INSERTADOS
             stmt = con.prepareStatement("SELECT * FROM Categorias WHERE idCategoria=?");
             stmt.setInt(1, categoria.getId());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 System.out.println(rs.getInt(1) + " " + rs.getString(2) + " \t" + rs.getString(3));
+            }
+            if (rs != null) {
+                rs.close();
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
